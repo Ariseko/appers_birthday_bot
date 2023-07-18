@@ -50,7 +50,8 @@ async def start(message: types.Message):
     await bot.send_photo(message.from_user.id, photo=photo,
                          caption=f'Давай знакомиться! Мы – <b>Базя, Пинг, Юнг, Тапа и Пуш</b>. Мы живем во всем, '
                                  f'что делает наша '
-                                 f'компания, но в первую очередь – в мобильном приложении билайна. \n\nА как тебя зовут?',
+                                 f'компания, но в первую очередь – в мобильном приложении билайна. \n\nА как тебя '
+                                 f'зовут?\n\n<i>Укажи свои имя и фамилию</i>',
                          parse_mode='html')
     await StatesClass.getRealName.set()
 
@@ -66,8 +67,8 @@ async def receivingRealName(message: types.Message, state: FSMContext):
                          '• Викторина с призами\n'
                          '• Интервью с каждым из нас\n'
                          '• Конкурс детского рисунка\n'
-                         '• Праздничное ток-шоу и игра в честь нашего дня рождения!\n\n'
-                         'Просто выбери, о чем ты хочешь узнать в первую очередь:')
+                         '• <b>Праздничное ток-шоу и игра в честь нашего дня рождения!</b>\n\n'
+                         'Просто выбери, о чем ты хочешь узнать в первую очередь:', parse_mode='html')
 
     await message.answer('С чего начнем?', reply_markup=mainMenuKeyboard)
 
@@ -184,7 +185,9 @@ async def q1Func(callback: types.CallbackQuery, state: FSMContext):
             data['counter'] = 1
 
     photo = open('static/q2.jpg', 'rb')
-    await bot.send_message(callback.from_user.id, text=q1Answer)
+    photoRobot = open('static/ping1.png', 'rb')
+
+    await bot.send_photo(callback.from_user.id, photo=photoRobot,caption=q1Answer)
     await bot.send_photo(callback.from_user.id, photo=photo,
                          caption=q2Question,
                          reply_markup=q2Keyboard)
@@ -216,7 +219,8 @@ async def q3Func(callback: types.CallbackQuery, state: FSMContext):
             data['counter'] += 1
 
     photo = open('static/q4.jpg', 'rb')
-    await bot.send_message(callback.from_user.id, text=q3Answer)
+    photoPing = open('static/ping.png', 'rb')
+    await bot.send_photo(callback.from_user.id, photo=photoPing,caption=q3Answer)
     await bot.send_photo(callback.from_user.id, photo=photo,
                          caption=q4Question,
                          reply_markup=q4Keyboard)
