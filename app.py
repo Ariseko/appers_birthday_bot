@@ -40,7 +40,7 @@ class StatesClass(StatesGroup):
 
 
 storage = MemoryStorage()
-bot = Bot(token='6311662572:AAH2bXsZtVoiVLXrXCa7evtnigCBQOxLy6Q')
+bot = Bot(token='6299354069:AAFS1PCkHrWmTD3GH58e2dfKU1PeoMQdUxY')
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
