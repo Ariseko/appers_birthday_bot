@@ -40,7 +40,7 @@ class StatesClass(StatesGroup):
 
 
 storage = MemoryStorage()
-bot = Bot(token='6299354069:AAFS1PCkHrWmTD3GH58e2dfKU1PeoMQdUxY')
+bot = Bot(token='6311662572:AAH2bXsZtVoiVLXrXCa7evtnigCBQOxLy6Q')
 dp = Dispatcher(bot, storage=MemoryStorage())
 
 
@@ -219,7 +219,8 @@ async def q3Func(callback: types.CallbackQuery, state: FSMContext):
             data['counter'] += 1
 
     photo = open('static/q4.jpg', 'rb')
-    await bot.send_message(callback.from_user.id, text=q3Answer)
+    photoYung = open('static/marriedYung.jpg', 'rb')
+    await bot.send_photo(callback.from_user.id, photo=photoYung, caption=q3Answer)
     await bot.send_photo(callback.from_user.id, photo=photo,
                          caption=q4Question,
                          reply_markup=q4Keyboard)
