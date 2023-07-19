@@ -13,6 +13,7 @@ import requests
 import sqlite3 as sq
 
 hookURL = 'https://hook.eu1.make.com/wdnwoajce7fgkhylo8wiu6sznxo5kc3u'
+zahodHookURL = 'https://hook.eu1.make.com/e2fr0u4a6fvy4g7yranpyx589ve2sww8'
 
 base = sq.connect('check.db')
 cursor = base.cursor()
@@ -46,6 +47,16 @@ dp = Dispatcher(bot, storage=MemoryStorage())
 
 @dp.message_handler(commands=['start'], state='*')
 async def start(message: types.Message):
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
+    dataToSendZahod = {
+        "username": f"{message.from_user.mention}",
+        "date": f"{dt_string}"
+    }
+
+    r = requests.post(zahodHookURL, data=json.dumps(dataToSendZahod), headers={'Content-Type': 'application/json'})
+
     photo = open('static/hello.jpg', 'rb')
     await bot.send_photo(message.from_user.id, photo=photo,
                          caption=f'Давай знакомиться! Мы – <b>Базя, Пинг, Юнг, Тапа и Пуш</b>. Мы живем во всем, '
